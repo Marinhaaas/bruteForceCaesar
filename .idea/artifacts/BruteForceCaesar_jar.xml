@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="jar" name="BruteForceCaesar:jar">
+    <output-path>$PROJECT_DIR$/out/artifacts/BruteForceCaesar_jar</output-path>
+    <root id="archive" name="BruteForceCaesar.jar">
+      <element id="module-output" name="BruteForceCaesar" />
+    </root>
+  </artifact>
+</component>
