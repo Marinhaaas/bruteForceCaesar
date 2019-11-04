@@ -10,7 +10,7 @@ public class BruteForceCaesar {
     public static void main(String[] args) {
         long start = System.currentTimeMillis();
         String alphabet = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ";
-        String salt, actual;
+        String salt, actualPre, actualSuf;
         int totalCount = 0;
         ArrayList<String> words = readWordList(args[1]);
 
@@ -20,9 +20,10 @@ public class BruteForceCaesar {
                     for (int l = 0; l <= 51; l++) {
                         totalCount += 1;
                         salt = new StringBuilder().append(alphabet.charAt(i)).append(alphabet.charAt(j)).toString();
-                        actual = textToHash(salt + caesar(words.get(k), l));
-                        if (!actual.equals(args[0])) {
-                            System.out.println(totalCount + " of " + 52 * 52 * 15189 * 52);
+                        actualPre = textToHash(salt + caesar(words.get(k), l));
+                        actualSuf = textToHash(caesar(words.get(k), l) + salt);
+                        if (!actualPre.equals(args[0]) && !actualSuf.equals(args[0])) {
+                            System.out.println(totalCount + " of 4271389824");
                         } else {
                             System.out.println();
                             System.out.println("--------------------------------");
@@ -35,6 +36,11 @@ public class BruteForceCaesar {
                             long timeElapsed = finish - start;
                             System.out.println("Duration of the BruteForce: " + timeElapsed / 1000 + " seconds");
                             System.out.println("Analyzed hashes: " + totalCount);
+                            if (actualPre.equals(args[0])) {
+                                System.out.println("Salt Position: Prefix");
+                            } else {
+                                System.out.println("Salt Position: Suffix");
+                            }
                             System.out.println("Salt: " + salt);
                             System.out.println("Caesar shift: " + l);
 
